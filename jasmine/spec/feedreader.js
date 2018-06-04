@@ -105,9 +105,32 @@ $(function() {
   })
 
   /* TODO: Write a new test suite named "New Feed Selection" */
+  describe('New Feed Selection', function() {
 
-      /* TODO: Write a test that ensures when a new feed is loaded
-       * by the loadFeed function that the content actually changes.
-       * Remember, loadFeed() is asynchronous.
-       */
+    /* TODO: Write a test that ensures when a new feed is loaded
+    * by the loadFeed function that the content actually changes.
+    * Remember, loadFeed() is asynchronous.
+    */
+    const loadContent = function(num, done) {
+      loadFeed(num, function() {
+        done();
+        console.log(`load content ${num} done`)
+      })
+    }
+
+    it('displays different content', function(done) {
+      loadContent(0, done);
+      let oldEntries = document.querySelectorAll('.entry');
+      let oldFirstEntry = oldEntries[0];
+      let oldFirstEntryHTML = oldFirstEntry.innerHTML;
+      console.log(`first entry defined`)
+      loadContent(1, done);
+      let newEntries = document.querySelectorAll('.entry');
+      let newFirstEntry = newEntries[0];
+      let newFirstEntryHTML = newFirstEntry.innerHTML;
+      console.log(`second entry defined`)
+      expect(oldFirstEntryHTML).not.toEqual(newFirstEntryHTML);
+    })
+
+  })
 }());
