@@ -86,18 +86,21 @@ $(function() {
     * the use of Jasmine's beforeEach and asynchronous done() function.
     */
     beforeEach(function(done) {
-      loadFeed(0);
-      done();
-      console.log('beforeEach done');
+      loadFeed(0, function(){
+        done();
+      });
     });
 
     it('are successfully loaded on the page', function(done) {
-      loadFeed(0);
-      let feed = document.querySelector('.feed');
-      console.log('expect started');
-      expect(feed.hasChildNodes()).toBe(true);
+      let entries = document.querySelectorAll('.entry');
+      if(entries.length > 0) {
+        let feed = entries[0].parentElement.parentElement;
+        expect(entries.length).toBeGreaterThan(0);
+        expect(feed.attributes.class.value === 'feed').toBe(true);
+      } else {
+        fail('No entries on page');
+      }
       done();
-      console.log('it done')
     })
   })
 
