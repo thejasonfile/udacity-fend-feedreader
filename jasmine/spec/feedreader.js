@@ -111,26 +111,23 @@ $(function() {
     * by the loadFeed function that the content actually changes.
     * Remember, loadFeed() is asynchronous.
     */
-    const loadContent = function(num, done) {
+    let titles = [];
+
+    const getContent = function(num, cb) {
       loadFeed(num, function() {
-        done();
-        console.log(`load content ${num} done`)
+        titles.push(document.querySelector('.header-title').innerText);
+        cb ? cb() : null;
       })
     }
 
-    it('displays different content', function(done) {
-      loadContent(0, done);
-      let oldEntries = document.querySelectorAll('.entry');
-      let oldFirstEntry = oldEntries[0];
-      let oldFirstEntryHTML = oldFirstEntry.innerHTML;
-      console.log(`first entry defined`)
-      loadContent(1, done);
-      let newEntries = document.querySelectorAll('.entry');
-      let newFirstEntry = newEntries[0];
-      let newFirstEntryHTML = newFirstEntry.innerHTML;
-      console.log(`second entry defined`)
-      expect(oldFirstEntryHTML).not.toEqual(newFirstEntryHTML);
-    })
+    beforeEach(function(done) {
+      getContent(0);
+      getContent(1, done)
+    });
 
-  })
+    it('changes content on page', function(done) {
+      expect(titles[0]).not.toBe(titles[1]);
+      done();
+    })
+  });
 }());
