@@ -121,8 +121,8 @@ $(function() {
     }
 
     beforeEach(function(done) {
-      getContent(0);
-      getContent(1, done)
+      getContent(1);
+      getContent(0, done)
     });
 
     it('changes content on page', function(done) {
