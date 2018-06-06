@@ -77,7 +77,7 @@ $(function() {
     it('are successfully loaded on the page', function(done) {
       let entries = document.querySelectorAll('.entry');
       let feed = document.querySelector('.feed');
-      
+
       expect($.contains(feed, entries[0])).toBe(true);
       done();
     })
@@ -86,37 +86,20 @@ $(function() {
   // A new test suite named "New Feed Selection"
   describe('New Feed Selection', function() {
 
-    /*
-    * A test that ensures when a new feed is loaded by the loadFeed function
-    * that the content actually changes. Remember, loadFeed() is asynchronous.
-    */
     let titles = [];
 
-    /*
-    * A function that calls 'loadFeed' with the provided feed number and
-    * callback function. Then it adds the title of the current feed into
-    * the 'titles' array and calls the callback if provided.
-    */
-    const getContent = function(num, cb) {
-      loadFeed(num, function() {
-        titles.push(document.querySelector('.header-title').innerText);
-        cb ? cb() : null;
-      })
-    }
-
-    /*
-    * Before each test get the content of two of the RSS feeds. The second call
-    * should also resolve with the 'done()' function.
-    */
     beforeEach(function(done) {
-      getContent(1);
-      getContent(0, done)
+      loadFeed(1, function() {
+        titles.push(document.querySelector('.header-title').innerText);
+        //nesting the loadFeed calls suggested by Udacity reviewers
+        loadFeed(0, function() {
+          titles.push(document.querySelector('.header-title').innerText);
+          done();
+        });
+      });
     });
 
-    /*
-    * Compare the two titles in the 'titles' array.  They should be different.
-    */
-    it('changes content on page', function(done) {
+    it('changes content on the page', function(done) {
       expect(titles[0]).not.toBe(titles[1]);
       done();
     })
