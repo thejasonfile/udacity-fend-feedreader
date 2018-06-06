@@ -70,15 +70,12 @@ $(function() {
     });
 
     /*
-    * Queries for elements on the page with the .entry class if there are any.
-    * If there are then it tests that the first of those elements is a
-    * descendent of the .feed class.
+    * After the feed has been loaded test that a .entry element exists as a
+    * child of the .feed element and that the length is greater than 0.
     */
     it('are successfully loaded on the page', function(done) {
-      let entries = document.querySelectorAll('.entry');
-      let feed = document.querySelector('.feed');
-
-      expect($.contains(feed, entries[0])).toBe(true);
+      // Suggestion from Udacity reviewer
+      expect(document.querySelectorAll('.feed .entry').length).toBeGreaterThan(0)
       done();
     })
   })
