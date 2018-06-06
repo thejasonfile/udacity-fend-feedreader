@@ -46,11 +46,12 @@ $(function() {
     * clicked.
     */
     it('opens when menu icon is clicked and closes when it is clicked again', function() {
+      let body = document.querySelector('body');
       let listIcon = document.querySelector('.icon-list');
       listIcon.click();
-      expect(body.attributes.class.value === "menu-hidden").toBe(false);
+      expect(body.classList.contains('menu-hidden')).toBe(false);
       listIcon.click();
-      expect(body.attributes.class.value === "menu-hidden").toBe(true);
+      expect(body.classList.contains('menu-hidden')).toBe(true);
     })
   })
 
