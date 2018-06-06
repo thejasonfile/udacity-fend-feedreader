@@ -11,6 +11,8 @@
 A project using [Jasmine](https://jasmine.github.io/index.html) to write tests for JavaScript.  This is project number 3 for [Udacity's](https://www.udacity.com/) Front-End Nanodegree (FEND) Program.
 
 Dependencies include:
+  * [jQuery](https://jquery.com/)
+  * [Handlebars.js](https://handlebarsjs.com/)
   * [Jasmine](https://jasmine.github.io/index.html)
   * [Ico Moon Fonts](https://icomoon.io/)
   * [Google Fonts](https://fonts.google.com/)
