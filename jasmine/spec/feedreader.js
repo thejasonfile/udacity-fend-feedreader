@@ -86,8 +86,15 @@ $(function() {
   // A new test suite named "New Feed Selection"
   describe('New Feed Selection', function() {
 
+    /* A test that ensures when a new feed is loaded by the loadFeed function
+    * that the content actually changes.
+    */
     let titles = [];
 
+    /*
+    * beforeEach calls 'loadFeed' twice and pushes the titles of both pages
+    * into the 'titles' array
+    */
     beforeEach(function(done) {
       loadFeed(1, function() {
         titles.push(document.querySelector('.header-title').innerText);
