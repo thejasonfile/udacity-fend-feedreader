@@ -76,13 +76,9 @@ $(function() {
     */
     it('are successfully loaded on the page', function(done) {
       let entries = document.querySelectorAll('.entry');
-      if(entries.length > 0) {
-        let feed = entries[0].parentElement.parentElement;
-        expect(entries.length).toBeGreaterThan(0);
-        expect(feed.attributes.class.value === 'feed').toBe(true);
-      } else {
-        fail('No entries on page');
-      }
+      let feed = document.querySelector('.feed');
+      
+      expect($.contains(feed, entries[0])).toBe(true);
       done();
     })
   })
